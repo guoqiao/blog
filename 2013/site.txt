@@ -1,0 +1,29 @@
+---
+title: guoqiao
+subtitle: Live for nothing, or die for something.
+posts_per_page: 10
+post_content_type: markdown
+post_paragraph_indent: no
+disqus: 
+duoshuo: 
+template_priority: auto
+template_inherit: yes
+template_clone_allowed: yes
+autoreload: auto
+post_url_format: normal
+scripts_per_page: |
+  <link rel="author" href="https://plus.google.com/+QiaoGuo" />
+scripts_for_doc: 
+auto_image: no
+smart_login: no
+comment: yes
+sync_by_3rd: no
+sync_by_3rd_public: no
+score_degree: 
+hidden_urls: 
+users: 
+domain: guoqiao.me
+domains:
+- guoqiao.farbox.com
+---
+Python/Django/Linux, HTML/CSS/JS, Apple/Google/Amazon
