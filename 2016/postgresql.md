@@ -1,44 +1,49 @@
 Title: PostgreSQL Notes for Ubuntu
 
 ## Naming
-A lot of smart developers are terrible at naming. Microsoft is a good(bad?) example, as well as PostgreSQL.
-`PostgreSQL` or `Postgres`, which one is right? As to [official history](http://www.postgresql.org/about/history/):
-
-    PostgreSQL, originally called Postgres
-
-So the right name should be `PostgreSQL` now, `Postgres` is the old name and should be deprecated.
-However, in [wikipedia](https://en.wikipedia.org/wiki/PostgreSQL), it begins with:
-
-    PostgreSQL, often simply Postgres, is an ...
-
-So the fact is, people use `Postgres` for short, and that's why I was confused.
-To be consistent, I will always use `PostgreSQL` to refer to this awesome database who doesn't know what it's name should be.
+PostgreSQL is the right name, originally called Postgres
 
 ## Install
 
-install server and client:
+Install:
 
     sudo apt-get install postgresql postgresql-client
 
-(so far, package names look ok.)
+Service:
 
-This will install:
-
-- a daemon process called `postgres`(should be `postgresd` or `postgresqld` strictly, right?)
-- a command line client  called `psql`(should be `postgresql`)
-- a service called `postgresql`(this name looks alright)
-- a database, a database role, and a linux user all called`postgres`(no password yet)
-- some helpful commands like `createuser` and `createdb`(looks like system commands, but actually not)
-
-OT: as you can see, PostgreSQL does have really terrible naming. Chaos.
-
-Make sure service is running:
-
-    sudo service postgresql status
+    sudo service postgresql status|start|stop|restart
 
 Check the linux user has been created:
 
     cat /etc/passwd | grep postgres
+
+This will install:
+
+- a daemon process called `postgres`
+- a command line client  called `psql`
+- a service called `postgresql`
+- a database, a database role, and a linux user all called`postgres`(no password yet)
+
+It will also install following PostgreSQL Client Applications:
+
+    clusterdb -- cluster a PostgreSQL database
+    createdb -- create a new PostgreSQL database
+    createlang -- install a PostgreSQL procedural language
+    createuser -- define a new PostgreSQL user account
+    dropdb -- remove a PostgreSQL database
+    droplang -- remove a PostgreSQL procedural language
+    dropuser -- remove a PostgreSQL user account
+    ecpg -- embedded SQL C preprocessor
+    pg_basebackup -- take a base backup of a PostgreSQL cluster
+    pg_config -- retrieve information about the installed version of PostgreSQL
+    pg_dump --  extract a PostgreSQL database into a script file or other archive file
+    pg_dumpall -- extract a PostgreSQL database cluster into a script file
+    pg_isready -- check the connection status of a PostgreSQL server
+    pg_receivexlog -- streams transaction logs from a PostgreSQL cluster
+    pg_restore --  restore a PostgreSQL database from an archive file created by pg_dump
+    psql --  PostgreSQL interactive terminal
+    reindexdb -- reindex a PostgreSQL database
+    vacuumdb -- garbage-collect and analyze a PostgreSQL database
 
 ## login and authentication
 In PostgreSQL, database users are called `roles`, just like the default user `postgres` here.
@@ -46,26 +51,21 @@ Usage of psql:
 
     psql [OPTION]... [DBNAME [USERNAME]]
 
-By default, you need a full command to login to a specific db:
+full cmd:
 
     psql -h 127.0.0.1 -p 5432 -d exampledb -U dbuser
-
-Or simpler:
-
     psql -h 127.0.0.1 -p 5432 exampledb dbuser
 
-Then it will ask for password.
-The -h and -p can be ignored if db is running on localhost:
+DBNAME and USERNAME can be options or args.
+All options above have default value:
+
+    -h: 127.0.0.1
+    -p: 5432
+    -U: $USER (current linux username)
+    -d: $USER (current linux username)
 
     psql exampledb dbuser
-
-And, if you have a user with the same name in your linux system and switched to or logined in as that user,
-you will be able to login without authentication:
-
     psql exampledb
-
-Even better, if the db also has the same name, you can just do:
-
     psql
 
 For example, after installation, we already have a db, a role and a system user with the same name `postgres`.
@@ -77,12 +77,13 @@ then we try to login in with:
 
     psql
 
+This equals to:
+
+    psql -h 127.0.0.1 -p 5432 -U postgres -d postgres
+
 You will see:
 
     postgres=#
-
-You logged in! Magic, right?
-Now you can run sql commands here, for example, show version:
 
     select version();
 
@@ -140,6 +141,10 @@ that will be even handy. For example, my linux user name is `joeg`, so I can do:
 
 Now if I login as joeg, I can login to my db shell with just `psql` any time.
 
+show all users:
+
+    \du
+
 ## Import sql file to your db
 Use `-f` option in linux shell:
 
@@ -177,6 +182,30 @@ So at the beginning, you will need to use pgcli to set the password first.
 
 Install it, and it will help you a lot.
 
+## allow remote connections:
+
+allow access from ip:
+
+    vim /etc/postgresql/9.5/main/postgresql.conf
+
+examples:
+
+    listen_addresses='localhost'
+    listen_addresses='10.10.10.10,192.168.1.10'
+    listen_addresses='*'
+
+
+set authentication rules:
+
+    vim /etc/postgresql/9.5/main/pg_hba.conf
+
+append a line to end. Examples:
+
+    host   all    all     0.0.0.0/0   trust  # trust anyone
+    host   all    all     0.0.0.0/0   md5  # send encrypted password
+    host   pact   joeg     192.168.196.15/16   trust
+
+
 ## Notes
 To drop a db:
 
@@ -189,4 +218,5 @@ To create a db:
 To restore a db from dump:
 
     pg_restore -h HOST -U USER -d DBNAME /path/to/dump
+
 
