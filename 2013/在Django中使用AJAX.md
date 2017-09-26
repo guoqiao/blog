@@ -7,7 +7,7 @@ Date: 2012-11-02 15:23:39
 
 `   
 
-    {% block js %
+    {% block js %}
 
     $(function() 
 
@@ -35,7 +35,7 @@ Date: 2012-11-02 15:23:39
 
     })
 
-    {% endblock %
+    {% endblock %}
 
 `
 
