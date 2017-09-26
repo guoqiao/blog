@@ -1,2 +1,3 @@
-# blog
-Use wiki as blog
+# guoqiao.github.io
+
+Guo Qiao's blog on github.
