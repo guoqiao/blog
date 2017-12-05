@@ -5,13 +5,11 @@ Date: 2012-11-02 15:23:39
 ## Javascript的写法：
 
 
-`   
 
-    {% block js %}
+```
+    $(function()
 
-    $(function() 
-
-        $("#id_box_type").change(function () 
+        $("#id_box_type").change(function ()
 
             var box_type_id = $(this).val()
 
@@ -19,7 +17,7 @@ Date: 2012-11-02 15:23:39
 
                 return
 
-            $.get("/ship/ajax_box_info/"+box_type_id+"/",function (data) 
+            $.get("/ship/ajax_box_info/"+box_type_id+"/",function (data)
 
                 $("#id_length").val(data.length)
 
@@ -35,12 +33,12 @@ Date: 2012-11-02 15:23:39
 
     })
 
-    {% endblock %}
-
-`
+```
 
 
 ## view 的写法：
+
+```
 
         import jso
 
@@ -62,11 +60,12 @@ Date: 2012-11-02 15:23:39
 
                 'weight':box_type.weight
 
-                
 
             data = json.dumps(box_type_info
 
             return HttpResponse(data,mimetype='application/json')
+
+```
 
 ## 要点
 
