@@ -1,4 +1,9 @@
-Title: Ansible Notes
+---
+layout: post
+title:  "Ansible Notes"
+date:   2016-01-01 23:04:37 +1200
+categories: posts
+---
 
 ## What
 Ansible is Simple IT Automation. It can finish similar tasks like Fabric, but more.
