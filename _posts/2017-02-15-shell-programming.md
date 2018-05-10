@@ -1,4 +1,10 @@
-# Shell Programming
+---
+layout: post
+title:  "Shell Programming Notes"
+date:   2018-05-10 23:04:37 +1200
+categories: posts
+
+---
 
 ## define var and use:
 
