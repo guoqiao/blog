@@ -1,3 +1,10 @@
+---
+layout: post
+title:  "Deepin Linux Key Mapping"
+date:   2018-05-10 23:04:37 +1200
+categories: posts
+---
+
 1. To change mapping of Caps Lock, do this fist:
 
 [code]gsettings set com.deepin.dde.keybinding.mediakey capslock '[]'[/code]
