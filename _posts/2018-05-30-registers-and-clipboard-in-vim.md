@@ -43,7 +43,7 @@ In Vim, you are using the unnamed register `"` to exchange by default:
 
     y,d,x,c --> " --> p
 
-In system, you are using system clipboard, which is the `*` regiter in Vim:
+In system, you are using system clipboard, which is the `*` register in Vim:
 
     Ctrl + C --> * --> Ctrl + V
 
@@ -89,4 +89,4 @@ If you need to use the same `vimrc` cross platforms, I recommend you keep this i
 
     set clipboard=unnamed
 
-This works on all 3 systems, except that on Linux, you are using the selection clipboard to interact with Vim.
+This works on all 3 systems, except that on Linux, you are using the selection clipboard to interact with Vim. E.g.: if you copied a line in Vim with `yy`, then you need to use mouse middle click to paste it
