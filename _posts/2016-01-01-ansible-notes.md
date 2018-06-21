@@ -13,9 +13,8 @@ Both Ansibel and Fabric are based on paramiko, a Python ssh library.
 
 ## Features
 
-* No client installation required on target machine
+* No client installation required on target machine(need python)
 * Target machine can be windows, with PowerShell
-* Only supports Python2 so far
 * Control machine can not be windows
 * Use YAML
 
