@@ -24,7 +24,7 @@ openstack 默认的磁盘大小只有 10G， 如何挂载一个 volume 来扩展
     w to write changes
     q to quit
 
-    You will get 1 only primary partition /dev/vdb1 in disk /dev/vdb
+    You will get only 1 primary partition /dev/vdb1 in disk /dev/vdb
 
     format partition to ext4:
 
@@ -63,7 +63,7 @@ openstack 默认的磁盘大小只有 10G， 如何挂载一个 volume 来扩展
     I/O size (minimum/optimal): 512 bytes / 512 bytes
 
 
-你可以看到，我们 attach 的 volume 已经从出现在列表中，显示为一个 disk.
+你可以看到，我们 attach 的 volume vdb 已经从出现在列表中，显示为一个 disk.
 
 不过，并不是这样你就可以使用这个 disk 存储数据了. 相当于你连接了一块新硬盘
 到你的电脑上, 硬件也能检测到. 但是操作系统(软件层面)还没有配置好.
@@ -150,8 +150,8 @@ fdisk 提示说设备没有可识别的分区表. 根据提示输入 m 查看帮
 
 根据最开始的设计，一个 disk 最多包含4个 partition.
 这显然不够用，于是扩展分区(Extended Partition)的概念被发明出来.
-原来的最顶层的不可分割分区被称作 Primary Partition, 它不能继续分割.
-如果你需要更多 partition, 则创建 Extended Partition.
+原来的不可分割分区现在被称为 Primary Partition.
+如果你需要更多 partition, 可以创建最多1个 Extended Partition.
 它可以进一步被分割为逻辑分区(Logical Partition).
 
 对于我们的情况，一个分区就够了. 选择默认的 p. 再次查看:
@@ -172,10 +172,12 @@ fdisk 提示说设备没有可识别的分区表. 根据提示输入 m 查看帮
 
     mount -t ext4 /dev/vdb1 /data
 
-Some how I have to mount the partition /dev/vdb1 other than the disk /dev/vdb.
-In `man mount`, it's doced that both are ok.
+不知道何故，我必须挂载 /dev/vdb1 这个 partition, 不能挂载 /dev/vdb 这个 disk.
+但 `man mount` 说明了两者都可以.
 
-Get types:
+获取 type 列表的两种方法:
 
     mount
     cat /proc/filesystems
+
+另外，openstack 里一个 volume 只能被挂载到一个 instance.
