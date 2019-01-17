@@ -40,7 +40,7 @@ openstack 默认的磁盘大小只有 10G， 如何挂载一个 volume 来扩展
 
 ### Attach
 
-在 openstack 创建一个 volume(相当于物理机上的 hard drive disk) 并 attach 到 instance 很容易，不赘述.
+在 openstack 创建一个 volume(相当于物理机上的 hard drive disk) 并 attach 到 instance 很容易，在网页上就能完成, 不赘述.
 (disk 和 volume 是一回事.)
 
 查看已有磁盘列表方法:
@@ -145,7 +145,7 @@ fdisk 提示说设备没有可识别的分区表. 根据提示输入 m 查看帮
 
 这样设计的作用很多.
 比如: 你可以在同一块 disk 上安装多个操作系统且互不干扰.
-又比如: Linux 上的 swap 文件放在单独分区可以提供性能.
+又比如: Linux 上的 swap 文件放在单独分区可以提高性能.
 等等.
 
 根据最开始的设计，一个 disk 最多包含4个 partition.
