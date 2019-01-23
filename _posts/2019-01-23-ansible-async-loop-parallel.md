@@ -5,11 +5,36 @@ date:   2019-01-23 00:00:00 +1200
 categories: posts
 ---
 
+Example playbook 1:
+
+    - hosts: localhost
+      gather_facts: no
+      tasks:
+        - name: sleep 10s
+          command: "sleep 10"
+          loop: "{{range(3)|list}}"
+          async: 33
+          poll: 1
+          register: async_loop
+
+        - debug: var=async_loop
+
+
+Output:
+
+    Wednesday 23 January 2019  13:14:26 +1300 (0:00:00.032)       0:00:33.328 ***** 
+    =============================================================================== 
+    command ---------------------------------------------------------------- 33.18s
+    debug ------------------------------------------------------------------- 0.03s
+    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~ 
+    total ------------------------------------------------------------------ 33.22s
+
+Tasks finished in serial, not in parallel, with async 33 and poll 1.
+
 Example playbook:
 
 
-    - name: test ansible async loop
-      hosts: localhost
+    - hosts: localhost
       gather_facts: no
       tasks:
         - name: sleep 10s
