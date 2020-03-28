@@ -1,0 +1,28 @@
+#!/usr/bin/env ansible-playbook
+
+
+- name: setup jekyll on ubuntu
+  hosts: localhost
+  tasks:
+    - name: apt install deps
+      become: yes
+      apt:
+        update_cache: yes
+        name:
+          - ruby-full
+          - build-essential
+          - zlib1g-dev
+
+    - name: add env vars
+      debug:
+        msg: |
+          'add to your shell rc file'
+          'export GEM_HOME="$HOME/gems"'
+          'export PATH="$HOME/gems/bin:$PATH"'
+
+    - name: gem install
+      gem:
+        name: "{{ item }}"
+      loop:
+          - jekyll
+          - bundler
