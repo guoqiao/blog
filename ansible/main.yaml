@@ -1,0 +1,14 @@
+#!/usr/bin/env ansible-playbook
+
+- name: setup jekyll on ubuntu
+  hosts: localhost
+
+  tasks:
+
+    - name: apt install
+      become: yes
+      apt:
+        name:
+          - ruby-full
+          - build-essential
+          - zlib1g-dev
