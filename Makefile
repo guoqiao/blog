@@ -2,4 +2,4 @@ build:
 	bundle exec jekyll build
 
 run:
-	bundle exec jekyll serve --liveload
+	bundle exec jekyll serve --livereload
