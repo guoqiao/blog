@@ -12,3 +12,12 @@
           - ruby-full
           - build-essential
           - zlib1g-dev
+
+    - name: gem install
+      gem:
+        name: "{{ item }}"
+      loop:
+          - jekyll
+          - bundle
+      when: '"GEM_HOME" in ansible_env'
+
