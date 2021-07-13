@@ -18,6 +18,6 @@
         name: "{{ item }}"
       loop:
           - jekyll
-          - bundle
+          - bundler
       when: '"GEM_HOME" in ansible_env'
 
